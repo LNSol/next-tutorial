@@ -1,7 +1,27 @@
-import '../styles/globals.css'
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+// import NavBar from '../components/NavBar';
+import Layout from '../components/Layout';
+import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
-export default MyApp
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools />
+      {/* <NavBar /> */}
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      {/* <span>Hello</span> */}
+    </QueryClientProvider>
+  );
+};
+export default MyApp;

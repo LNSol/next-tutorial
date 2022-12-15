@@ -1,0 +1,9 @@
+.nav {
+  background-color: tomato;
+}
+.link {
+  text-decoration: none;
+}
+.active {
+  color: red;
+}
