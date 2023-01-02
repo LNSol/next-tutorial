@@ -3,6 +3,7 @@ import { Buffer } from 'buffer';
 
 const tossSuccess = (req, res) => {
   const { paymentKey, orderId, amount } = req.query;
+  console.log('res > ', res);
 
   const options = {
     method: 'POST',
@@ -23,7 +24,7 @@ const tossSuccess = (req, res) => {
 
   axios(options)
     .then((response) => {
-      console.log('response > ', response);
+      console.log('response.data > ', response.data);
       res.status(200).redirect('http://localhost:3001/toss');
     })
     .catch((err) => {
