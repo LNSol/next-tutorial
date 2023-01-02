@@ -37,6 +37,12 @@ export default function NavBar() {
         >
           Reverse
         </Link>
+        <Link
+          href='/toss'
+          className={router.pathname === '/toss' ? 'active' : ''}
+        >
+          Toss
+        </Link>
       </div>
       <style jsx>{`
         nav {
