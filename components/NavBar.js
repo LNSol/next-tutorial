@@ -38,10 +38,10 @@ export default function NavBar() {
           Reverse
         </Link>
         <Link
-          href='/infinite/chat'
-          className={router.pathname === '/infinite/chat' ? 'active' : ''}
+          href='/toss'
+          className={router.pathname === '/toss' ? 'active' : ''}
         >
-          Chat
+          Toss
         </Link>
       </div>
       <style jsx>{`

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tosspayments/payment-sdk": "^1.2.5",
     "axios": "^1.2.0",
     "clsx": "^1.2.1",
     "eslint": "8.28.0",
