@@ -1,4 +1,5 @@
 import { loadTossPayments } from '@tosspayments/payment-sdk';
+import { loadBrandPay } from '@tosspayments/brandpay-sdk';
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const clientKey = process.env.NEXT_PUBLIC_TOSS_TEST_KEY;
 const secretKey = process.env.NEXT_PUBLIC_TOSS_SECRET_KEY;
@@ -63,12 +64,32 @@ const Toss = () => {
     fetch(`${API_URL}api/toss/billing/pay`, {
       method: 'POST',
       body: JSON.stringify({
-        billingKey: 'Dluvak1zIJmgVlx3FuWwJm2jodyV7rkJxgFKbwBa7jk=',
+        billingKey: 'AtzN0qXP-1Ln82dxyaU6Zh6-NN2sHWRha7zQpUFIpMA=',
         customerKey: 'agalinfighter',
       }),
     })
       .then((response) => console.log(response))
       .catch((err) => console.error(err));
+  };
+
+  const brandPay = () => {
+    loadBrandPay(clientKey, 'agalinfighter', {
+      redirectUrl: 'http://localhost:3001/api/toss/brand/callbackauth',
+    }).then((brandpay) => {
+      brandpay
+        .requestPayment({
+          amount: 15000,
+          orderId: 'agalin111',
+          orderName: '토토스스 외 2건',
+        })
+        .then((pay) => {
+          console.log('pay > ', pay); // amount, methodId, orderId, paymentKey
+          fetch(`${API_URL}api/toss/brand/success`, {
+            method: 'POST',
+            body: JSON.stringify({ ...pay, customerKey: 'agalinfighter' }),
+          });
+        });
+    });
   };
 
   return (
@@ -80,6 +101,7 @@ const Toss = () => {
       <button onClick={easyTossPay}>간편결제 - 토스페이</button>
       <button onClick={billing}>카드 등록하기</button>
       <button onClick={billingPay}>등록한 카드로 결제하기</button>
+      <button onClick={brandPay}>홈텔페이</button>
     </>
   );
 };
