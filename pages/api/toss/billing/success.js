@@ -1,13 +1,11 @@
 import axios from 'axios';
 import { Buffer } from 'buffer';
 
-const tossSuccess = (req, res) => {
-  const { paymentKey, orderId, amount } = req.query;
-  console.log('res > ', res);
-
+const billingSuccess = (req, res) => {
+  const { customerKey, authKey } = req.query;
   const options = {
     method: 'POST',
-    url: 'https://api.tosspayments.com/v1/payments/confirm',
+    url: 'https://api.tosspayments.com/v1/billing/authorizations/issue',
     headers: {
       Authorization: `Basic ${Buffer.from(
         process.env.NEXT_PUBLIC_TOSS_SECRET_KEY + ':',
@@ -16,19 +14,19 @@ const tossSuccess = (req, res) => {
       'Content-Type': 'application/json',
     },
     data: {
-      paymentKey,
-      orderId,
-      amount,
+      authKey,
+      customerKey,
     },
   };
 
   axios(options)
     .then((response) => {
       console.log('response.data > ', response.data);
-      res.status(200).redirect('http://localhost:3001/toss');
+      return res.status(200).send('ok');
     })
     .catch((err) => {
-      console.error('error > ', err);
+      console.error(err);
+      return res.status(500);
     });
 };
-export default tossSuccess;
+export default billingSuccess;
