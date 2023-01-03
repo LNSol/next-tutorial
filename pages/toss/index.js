@@ -12,7 +12,7 @@ const Toss = () => {
         console.log('신용, 체크 카드 결제');
         tossPayments.requestPayment('카드', {
           amount: 38000,
-          orderId: 'daemyunslayer9',
+          orderId: 'agalinfighter-2',
           orderName: '토스 마스크 외 1건',
           customerName: '아갈인파이터',
           successUrl: `${API_URL}api/toss/success`,
@@ -30,7 +30,7 @@ const Toss = () => {
         console.log('간편결제 - 토스페이');
         tossPayments.requestPayment('카드', {
           amount: 20000,
-          orderId: 'easyPay-TossPay10',
+          orderId: 'easyPay-agalinfighter-3',
           orderName: '토스 티셔츠 외 2건',
           customerName: '배가아몬드',
           successUrl: `${API_URL}api/toss/success`,
